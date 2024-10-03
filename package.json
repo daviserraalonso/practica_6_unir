@@ -1,0 +1,24 @@
+{
+  "name": "practica_6_unir",
+  "version": "1.0.0",
+  "description": "Repositorio para la actividad 6 de UNIR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/common": "^18.2.7",
+    "@angular/platform-server": "^18.2.7",
+    "@angular/ssr": "^18.2.7",
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
