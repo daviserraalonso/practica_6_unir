@@ -12,31 +12,62 @@
     </div>
 </nav>
 
-<div class="container mt-5 mb-5">
-    <div class="container mt-5">
-        <h2>Editar Usuario</h2>
-        <div class="container mt-5">
-            <form *ngIf="user" (ngSubmit)="saveUser()">
-              <div class="mb-3">
-                <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name" name="firstName" required>
-              </div>
-              <div class="mb-3">
-                <label for="lastName" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name" name="lastName" required>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
-              </div>
-              <div class="mb-3">
-                <label for="image" class="form-label">Imagen</label>
-                <input type="text" class="form-control" id="image" [(ngModel)]="user.image" name="image" required>
-              </div>
-              <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            </form>
+<div class="container mt-5">
+  <h2 *ngIf="isEditMode">Editar Usuario</h2>
+  <h2 *ngIf="!isEditMode">Crear Usuario</h2>
+  <div class="container mt-5">
+    <form (ngSubmit)="saveUser()" #userForm="ngForm">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name" name="firstName" required>
+        <div *ngIf="userForm.controls['firstName']?.invalid && userForm.controls['firstName']?.touched" class="text-danger">
+            El nombre es requerido.
         </div>
-
+      </div>
+      
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name" name="lastName" required>
+        <div *ngIf="userForm.controls['lastName']?.invalid && userForm.controls['lastName']?.touched" class="text-danger">
+            Los apellidos son requeridos.
+        </div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input type="text" class="form-control" id="username" 
+               [(ngModel)]="user.username" name="username" required>
+        <div *ngIf="userForm.controls['username']?.invalid && userForm.controls['username']?.touched" class="text-danger">
+            Usuario es requerido.
+        </div>
     </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" 
+               [(ngModel)]="user.email" name="email" required email>
+        <div *ngIf="userForm.controls['email']?.invalid && userForm.controls['email']?.touched" class="text-danger">
+            Email es requerido y debe ser válido.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Imagen</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="image" 
+          [(ngModel)]="user.image" 
+          name="image" 
+          required
+      >
+      <div *ngIf="userForm.controls['image']?.invalid && userForm.controls['image']?.touched" class="text-danger">
+          Imagen es requerida.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" [disabled]="userForm.invalid">Guardar</button>
+</form>
+    
+  </div>
 </div>
+
+
   

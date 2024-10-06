@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  user: User | null = null;
+  user: User = { _id: '', id: 0, first_name: '', last_name: '', username: '', email: '', image: '', password: '' };
   isEditMode: boolean = false;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {}
