@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ApiResponse } from '../../services/api-response.model';
 import { User } from '../../services/user.model';
-import { CommonModule } from '@angular/common'; // Asegúrate de importar CommonModule
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,7 @@ export class HomeComponent {
   currentPage: number = 1;
   itemsPerPage: number = 4; // Cambia esto según lo que desees
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
       this.loadUsers();
   }
 
@@ -45,14 +47,14 @@ export class HomeComponent {
   nextPage() {
       if (this.currentPage * this.itemsPerPage < this.users.length) {
           this.currentPage++;
-          this.updateDisplayedUsers(); // Asegúrate de que se actualice aquí
+          this.updateDisplayedUsers();
       }
   }
 
   previousPage() {
       if (this.currentPage > 1) {
           this.currentPage--;
-          this.updateDisplayedUsers(); // Asegúrate de que se actualice aquí
+          this.updateDisplayedUsers();
       }
   }
 
@@ -61,9 +63,8 @@ export class HomeComponent {
   }
 
   viewDetails(user: User) {
-    // Lógica para ver detalles del usuario
-      console.log('Ver detalles de:', user);
-  }
+    this.router.navigate([`/user-details/${user._id}`]);
+}
 
   editUser(user: User) {
       // Lógica para actualizar el usuario

@@ -1,0 +1,55 @@
+<!-- Menú superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Práctica 6 UNIR</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a routerLink="/" (click)="goBack()" class="btn btn-link nav-link">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/new-user" class="btn btn-link nav-link">Nuevo Usuario</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este usuario?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger" (click)="user && user._id ? deleteUser(user._id) : null">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img class="rounded-circle" [src]="user?.image" alt="{{ user?.first_name }}" style="width: 150px; height: 150px;" />
+        </div>
+        <div class="col-md-8">
+            <h2>{{ user?.first_name }}</h2>
+            <h2>{{ user?.last_name }}</h2>
+            <p><strong>Usuario:</strong> {{ user?.username }}</p>
+            <p><strong>Email:</strong> {{ user?.email }}</p>
+            <hr class="my-4" />
+            <div class="mt-3">
+                <button class="btn btn-danger mr-3" *ngIf="user" (click)="deleteUser(user._id)">Eliminar</button>
+                <button class="btn btn-warning mr-3" *ngIf="user" (click)="editUser(user)">Actualizar</button>
+                <button class="btn btn-secondary" (click)="goBack()">Volver al listado</button>
+            </div>
+        </div>
+    </div>
+</div>
