@@ -1,13 +1,13 @@
 // user.model.ts
 export interface User {
   _id: string;
-  id: number;
+  id?: number;
   first_name: string;
   last_name: string;
   username: string;
   email: string;
   image: string;
-  password: string; // Aunque no deberías mostrar la contraseña en tu aplicación
+  password?: string; // Aunque no deberías mostrar la contraseña en tu aplicación
   phone?: string;
 }
 

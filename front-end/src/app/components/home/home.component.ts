@@ -62,19 +62,42 @@ export class HomeComponent {
     return Math.ceil(this.users.length / this.itemsPerPage);
   }
 
-  viewDetails(user: User) {
-    this.router.navigate([`/user-details/${user._id}`]);
-}
+    viewDetails(user: User) {
+        console.log(user);
+        this.router.navigate([`/user-details/${user._id}`]);
+    }
 
-  editUser(user: User) {
-      // Lógica para actualizar el usuario
-      console.log('Actualizar usuario:', user);
-  }
+    home() {
+        this.router.navigate(['/']);
+    }
 
-  deleteUser(user: User) {
-      // Lógica para borrar el usuario
-      console.log('Borrar usuario:', user);
-  }
+    newUser() {
+        this.router.navigate(['/new-user']);
+    }
+
+    deleteUser(userId: string | undefined) {
+        if (!userId) {
+            console.error('ID de usuario no disponible');
+            return;
+        }
+        
+        const confirmation = confirm("¿Estás seguro de que deseas eliminar este usuario?");
+        if (confirmation) {
+            this.userService.deleteUser(userId).subscribe({
+                next: (response) => {
+                  console.log(response)
+                  alert("usuario eliminado correctametne")
+                },
+                error: (error) => {
+                    console.error('Error al eliminar el usuario:', error);
+                }
+            });
+        }
+    }
+    
+    editUser(user: User) {
+        this.router.navigate([`/edit-user/${user._id}`]);
+    }
 }
 
 
